@@ -6,10 +6,12 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas";
 
 //slices
+import { activitySlice } from "./slices";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const reducer = combineReducers({
+  activity: activitySlice
 });
 
 export const store = configureStore({

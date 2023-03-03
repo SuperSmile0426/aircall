@@ -1,2 +1,5 @@
+import activitySlice from "./activity.slice"
 
-export { }
+export {
+  activitySlice
+}

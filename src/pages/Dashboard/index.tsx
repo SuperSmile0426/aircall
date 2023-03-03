@@ -5,8 +5,6 @@ import React from "react";
 import { DashboardPageStyle } from "./index.style";
 
 const DashboardPage = () => {
-
-
   return (
     <DashboardPageStyle>
       <h1>Dashboard</h1>
