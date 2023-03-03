@@ -2,14 +2,15 @@
 import { all, takeLatest } from "redux-saga/effects";
 
 //sagas
-import { GetActivitySaga } from "./activity.saga";
+import { getActivityDetailSaga, getActivitySaga } from "./activity.saga";
 
 //slices
-import { getActivity } from "../slices/activity.slice";
+import { getActivity, getActivityDetail } from "../slices/activity.slice";
 
 //sagas
 function* rootSaga() {
-  yield all([takeLatest(getActivity.type, GetActivitySaga)]);
+  yield all([takeLatest(getActivity.type, getActivitySaga)]);
+  yield all([takeLatest(getActivityDetail.type, getActivityDetailSaga)]);
 }
 
 export default rootSaga;

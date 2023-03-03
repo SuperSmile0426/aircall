@@ -1,6 +1,6 @@
 export default interface IActivity {
-  id: number;
-  outbound: string;
+  id: string;
+  direction: string;
   from: number;
   to: number;
   via: number;

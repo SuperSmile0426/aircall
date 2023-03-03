@@ -1,5 +1,7 @@
-import DashboardPage from "./Dashboard";
+import ActivityPage from "./Activity";
+import ActivityDetailPage from "./ActivityDetail";
 
 export {
-  DashboardPage
+  ActivityPage,
+  ActivityDetailPage
 }

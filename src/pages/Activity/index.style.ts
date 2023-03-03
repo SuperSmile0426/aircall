@@ -1,7 +1,7 @@
 // import mui module
 import styled from '@emotion/styled';
 
-export const DashboardPageStyle = styled('div')(({ theme }: any) => {
+export const ActivityPageStyle = styled('div')(({ theme }: any) => {
   return {
     ".header-container": {
       display: "flex",

@@ -6,6 +6,9 @@ import {
     Box,
 } from '@mui/material';
 
+// import sub component
+import { ActivityComponent } from "../index"
+
 // import styles
 import { FeedComponentStyle } from './index.style';
 
@@ -22,9 +25,16 @@ const FeedComponent: React.FC<Props> = ({
 
     return (
         <FeedComponentStyle>
-            {data.map((item: IActivity, index: number) => (
-                <Box key={index}>{item.from}</Box>
-            ))}
+            {data.length > 0 ?
+                <>
+                    {data.map((item: IActivity, index: number) => (
+                        <Box key={index}>
+                            <ActivityComponent data={item} />
+                        </Box>
+                    ))}
+
+                </>
+                : <Box>Loading...</Box>}
         </FeedComponentStyle>
     )
 };

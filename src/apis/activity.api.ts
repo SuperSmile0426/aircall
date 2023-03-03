@@ -14,7 +14,7 @@ const activityApi = {
     }
   },
 
-  async getActivityById(id: number) {
+  async getActivityById(id: string) {
     try {
       const res = await mainClient.get(
         `${process.env.REACT_APP_SERVER_API}/activities/${id}`,

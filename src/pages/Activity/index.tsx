@@ -12,16 +12,18 @@ import CallIcon from '@mui/icons-material/Call';
 import { FeedComponent } from "../../components";
 
 // import styles
-import { DashboardPageStyle } from "./index.style";
+import { ActivityPageStyle } from "./index.style";
 
 // redux & store
 import { RootState } from '../../redux/store';
 import { getActivity } from "../../redux/slices/activity.slice";
 import { IActivity } from "../../models";
 
-const DashboardPage = () => {
+const ActivityPage = () => {
   const dispatch = useDispatch();
   const { activities } = useSelector((state: RootState) => state.activity);
+
+  const [feed, setFeed] = useState<IActivity[]>(activities);
 
   const [tabNum, setValue] = useState(0);
 
@@ -31,10 +33,14 @@ const DashboardPage = () => {
 
   useEffect(() => {
     dispatch(getActivity({}));
-  }, [dispatch])
+  }, [dispatch]);
+
+  useEffect(() => {
+    setFeed(activities);
+  }, [activities])
 
   return (
-    <DashboardPageStyle>
+    <ActivityPageStyle>
       <Box className="header-container">
         <Box className="header-title"><CallIcon /> Activity</Box>
         <Tabs value={tabNum} onChange={handleChange} aria-label="test" className="tab-contaner">
@@ -49,19 +55,19 @@ const DashboardPage = () => {
             {(() => {
               switch (tabNum) {
                 case 0:
-                  return <FeedComponent data={activities.filter((item: IActivity) => item.is_archived === true)} />;
+                  return <FeedComponent data={feed.filter((item: IActivity) => item.is_archived === false && item.call_type === "missed" && item.direction === "inbound")} />;
 
                 case 1:
-                  return <FeedComponent data={activities} />;
+                  return <FeedComponent data={feed.filter((item: IActivity) => item.is_archived === false)} />;
 
                 default:
-                  return <FeedComponent data={activities} />;
+                  return <FeedComponent data={feed} />;
               }
             })()}
           </Box></>
       })()}
-    </DashboardPageStyle>
+    </ActivityPageStyle>
   );
 };
 
-export default DashboardPage;
+export default ActivityPage;

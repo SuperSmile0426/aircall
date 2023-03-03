@@ -8,14 +8,31 @@ type errorType = {
 type initialStateType = {
   gettingActivity: boolean,
   gotActivity: boolean,
+  gettingActivityDetail: boolean,
+  gotActivityDetail: boolean,
   activities: IActivity[],
+  activityDetail: IActivity,
   error: errorType;
 }
 
 const initialState: initialStateType = {
   gettingActivity: false,
   gotActivity: false,
+
+  gettingActivityDetail: false,
+  gotActivityDetail: false,
   activities: [],
+  activityDetail: {
+    id: "0",
+    direction: "0",
+    from: 0,
+    to: 0,
+    via: 0,
+    duration: 0,
+    call_type: "0",
+    is_archived: false,
+    created_at: "0",
+  },
   error: { message: "" }
 }
 
@@ -25,7 +42,7 @@ const ActivitySlice = createSlice({
   initialState: initialState,
   reducers: {
     /**
-     * SignIn
+     * getActivity
      */
     getActivity(state: initialStateType, action: PayloadAction<{}>) {
       state.gettingActivity = true;
@@ -41,8 +58,26 @@ const ActivitySlice = createSlice({
     getActivityFailure(state: initialStateType, action: PayloadAction<{ error: string }>) {
       state.gettingActivity = false;
       state.gotActivity = false;
-      console.log("action.payload.error;", action.payload.error);
+      state.error.message = action.payload.error;
+    },
 
+    /**
+     * getActivity
+     */
+    getActivityDetail(state: initialStateType, action: PayloadAction<{ id: string }>) {
+      state.gettingActivityDetail = true;
+      state.gotActivityDetail = false;
+    },
+
+    getActivityDetailSuccess(state: initialStateType, action: PayloadAction<{ activity: IActivity }>) {
+      state.gettingActivityDetail = false;
+      state.gotActivityDetail = true;
+      state.activityDetail = action.payload.activity;
+    },
+
+    getActivityDetailFailure(state: initialStateType, action: PayloadAction<{ error: string }>) {
+      state.gettingActivityDetail = false;
+      state.gotActivityDetail = false;
       state.error.message = action.payload.error;
     },
 
@@ -56,6 +91,11 @@ export const {
   getActivity,
   getActivitySuccess,
   getActivityFailure,
+
+  getActivityDetail,
+  getActivityDetailSuccess,
+  getActivityDetailFailure,
+
   formatError
 } = ActivitySlice.actions;
 
