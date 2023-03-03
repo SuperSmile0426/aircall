@@ -6,19 +6,25 @@ import {
     Box,
 } from '@mui/material';
 
-// import components
-import {
-} from '../index';
-
 // import styles
 import { FeedComponentStyle } from './index.style';
 
-//model
-const FeedComponent: React.FC = () => {
+//import models
+import { IActivity } from '../../models';
+
+type Props = {
+    data: IActivity[]
+};
+
+const FeedComponent: React.FC<Props> = ({
+    data
+}) => {
 
     return (
         <FeedComponentStyle>
-
+            {data.map((item: IActivity, index: number) => (
+                <Box key={index}>{item.from}</Box>
+            ))}
         </FeedComponentStyle>
     )
 };

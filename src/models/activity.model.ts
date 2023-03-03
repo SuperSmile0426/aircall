@@ -1,5 +1,5 @@
 export default interface IActivity {
-  id:string;
+  id: number;
   outbound: string;
   from: number;
   to: number;
@@ -7,5 +7,5 @@ export default interface IActivity {
   duration: number;
   call_type: string;
   is_archived: boolean;
-  created_at:string;
+  created_at: string;
 }

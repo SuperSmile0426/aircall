@@ -3,7 +3,6 @@ import React from 'react';
 
 // import mui components
 import {
-    Box,
 } from '@mui/material';
 
 // import components

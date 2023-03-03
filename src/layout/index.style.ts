@@ -6,8 +6,6 @@ export const LayoutComponentStyle = styled('div')(({ theme }: any) => {
     widows: "100%",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
     padding: "30px 45px 100px 45px",
 
     '@global': {
