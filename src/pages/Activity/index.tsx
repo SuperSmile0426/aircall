@@ -61,7 +61,7 @@ const ActivityPage = () => {
                   return <FeedComponent data={feed.filter((item: IActivity) => item.is_archived === false)} />;
 
                 default:
-                  return <FeedComponent data={feed} />;
+                  return <FeedComponent data={feed.filter((item: IActivity) => item.is_archived === false && item.call_type === "missed" && item.direction === "inbound")} />;
               }
             })()}
           </Box></>

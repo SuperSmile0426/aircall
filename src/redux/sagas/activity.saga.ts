@@ -7,11 +7,15 @@ import activityApi from "../../apis/activity.api";
 
 // import slices
 import {
+  getActivity,
   getActivitySuccess,
   getActivityFailure,
 
   getActivityDetailSuccess,
-  getActivityDetailFailure
+  getActivityDetailFailure,
+
+  archieveActivitySuccess,
+  archieveActivityFailure
 } from "../slices/activity.slice";
 
 interface ResponseGenerator {
@@ -62,6 +66,28 @@ export function* getActivityDetailSaga(action: PayloadAction<{ id: string }>) {
     } else {
       console.log(error.response)
       yield put(getActivityDetailFailure({ error: "Network connection error" }));
+    }
+  }
+}
+
+export function* archieveActivitySaga(action: PayloadAction<{ id: string }>) {
+  try {
+    let result: ResponseGenerator = yield call(activityApi.archieveActivity, action.payload.id);
+
+    if (result.data) {
+      yield put(archieveActivitySuccess({}));
+      yield put(getActivity({}));
+      return;
+    }
+    yield put(archieveActivityFailure({ error: "There isn't any response data from backend." }));
+
+  } catch (error: any) {
+    if (error.response) {
+      console.log(error.response.data.message);
+      yield put(archieveActivityFailure({ error: error.response.data.message }));
+    } else {
+      console.log(error.response)
+      yield put(archieveActivityFailure({ error: "Network connection error" }));
     }
   }
 }

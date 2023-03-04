@@ -1,6 +1,6 @@
-import ActivityDetailComponent from "./Detail"
-import FeedComponent from "./Feed"
 import ActivityComponent from "./Activity"
+import ActivityDetailComponent from "./ActivityDetail"
+import FeedComponent from "./Feed"
 
 export {
   FeedComponent,

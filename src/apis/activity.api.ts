@@ -16,10 +16,19 @@ const activityApi = {
 
   async getActivityById(id: string) {
     try {
-      const res = await mainClient.get(
-        `${process.env.REACT_APP_SERVER_API}/activities/${id}`,
-      );
-      const resBody = res.data;
+      const res = await mainClient.get(`https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities/${id}`);
+      const resBody = res;
+      return resBody;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  async archieveActivity(id: string) {
+    try {
+      const res = await mainClient.patch(`https://charming-bat-singlet.cyclic.app/https://cerulean-marlin-wig.cyclic.app/activities/${id}`, { is_archived: true });
+      console.log(res);
+      const resBody = res;
       return resBody;
     } catch (err) {
       throw err;

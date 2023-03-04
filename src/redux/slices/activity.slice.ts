@@ -8,12 +8,29 @@ type errorType = {
 type initialStateType = {
   gettingActivity: boolean,
   gotActivity: boolean,
+
   gettingActivityDetail: boolean,
   gotActivityDetail: boolean,
+
+  archievingActivity: boolean,
+  archievedActivity: boolean,
+
   activities: IActivity[],
   activityDetail: IActivity,
   error: errorType;
 }
+
+const defaultActivityDetail: IActivity = {
+  id: "0",
+  direction: "0",
+  from: 0,
+  to: 0,
+  via: 0,
+  duration: 0,
+  call_type: "0",
+  is_archived: false,
+  created_at: "0",
+};
 
 const initialState: initialStateType = {
   gettingActivity: false,
@@ -21,18 +38,12 @@ const initialState: initialStateType = {
 
   gettingActivityDetail: false,
   gotActivityDetail: false,
+
+  archievingActivity: false,
+  archievedActivity: false,
+
   activities: [],
-  activityDetail: {
-    id: "0",
-    direction: "0",
-    from: 0,
-    to: 0,
-    via: 0,
-    duration: 0,
-    call_type: "0",
-    is_archived: false,
-    created_at: "0",
-  },
+  activityDetail: defaultActivityDetail,
   error: { message: "" }
 }
 
@@ -61,10 +72,12 @@ const ActivitySlice = createSlice({
       state.error.message = action.payload.error;
     },
 
+
     /**
-     * getActivity
+     * getActivityDetailById
      */
     getActivityDetail(state: initialStateType, action: PayloadAction<{ id: string }>) {
+      state.activityDetail = defaultActivityDetail;
       state.gettingActivityDetail = true;
       state.gotActivityDetail = false;
     },
@@ -78,6 +91,26 @@ const ActivitySlice = createSlice({
     getActivityDetailFailure(state: initialStateType, action: PayloadAction<{ error: string }>) {
       state.gettingActivityDetail = false;
       state.gotActivityDetail = false;
+      state.error.message = action.payload.error;
+    },
+
+
+    /**
+     * archieveActivity
+     */
+    archieveActivity(state: initialStateType, action: PayloadAction<{ id: string }>) {
+      state.archievingActivity = true;
+      state.archievedActivity = false;
+    },
+
+    archieveActivitySuccess(state: initialStateType, action: PayloadAction<{}>) {
+      state.archievingActivity = false;
+      state.archievedActivity = true;
+    },
+
+    archieveActivityFailure(state: initialStateType, action: PayloadAction<{ error: string }>) {
+      state.archievingActivity = false;
+      state.archievedActivity = false;
       state.error.message = action.payload.error;
     },
 
@@ -95,6 +128,10 @@ export const {
   getActivityDetail,
   getActivityDetailSuccess,
   getActivityDetailFailure,
+
+  archieveActivity,
+  archieveActivitySuccess,
+  archieveActivityFailure,
 
   formatError
 } = ActivitySlice.actions;

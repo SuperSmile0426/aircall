@@ -22,6 +22,23 @@ export const ActivityComponentStyle = styled("div")(({ theme }: any) => {
       display: "flex",
       alignItems: "center",
       gap: "20px",
+    },
+
+    ".activity-footer": {
+      ".archieve-text": {
+        fontSize: "14px",
+
+        cursor: "pointer",
+        ":hover": {
+          background: "#EEEEEE",
+          fontWeight: "700"
+        },
+        ":active": {
+          background: "#DDDDDD",
+          color: "red"
+        },
+
+      }
     }
   };
 });

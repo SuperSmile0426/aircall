@@ -1,13 +1,14 @@
 // import node modules
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 
 // import mui components
 import {
     Box
 } from '@mui/material';
 
-// ipmort mui component
+// import mui component
 import PhoneMissedIcon from '@mui/icons-material/PhoneMissed';
 import CallEndIcon from '@mui/icons-material/CallEnd';
 import VoicemailIcon from '@mui/icons-material/Voicemail';
@@ -22,6 +23,9 @@ import { ActivityComponentStyle } from './index.style';
 //import models
 import { IActivity } from '../../models';
 
+// redux & store
+import { archieveActivity } from "../../redux/slices/activity.slice";
+
 type Props = {
     data: IActivity
 };
@@ -30,6 +34,18 @@ const ActivityComponent: React.FC<Props> = ({
     data
 }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const archiieveActivtity = (event: any, id: string) => {
+        console.log(id);
+        if (id) {
+            dispatch(archieveActivity({ id }));
+            event.stopPropagation();
+        } else {
+            alert("ID Undefined")
+        }
+    }
+
 
     return (
         <ActivityComponentStyle onClick={() => { navigate(`detail/${data.id}`) }}>
@@ -56,9 +72,10 @@ const ActivityComponent: React.FC<Props> = ({
                 }
 
             </Box>
-            <Box>
+
+            <Box className="activity-footer">
                 {new Date(data.created_at).getHours()} : {new Date(data.created_at).getMinutes()}
-                <Box>Achieve</Box>
+                <Box className="archieve-text" onClick={(event: any) => archiieveActivtity(event, data.id)}>Achieve</Box>
             </Box>
         </ActivityComponentStyle >
     )

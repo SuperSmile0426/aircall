@@ -12,10 +12,12 @@ import { Box } from "@mui/material";
 // import styles
 import { ActivityDetailPageStyle } from "./index.style";
 
+// import models
+import { IActivity } from "../../models";
+
 // redux & store
 import { RootState } from '../../redux/store';
-import { getActivity } from "../../redux/slices/activity.slice";
-import { IActivity } from "../../models";
+import { getActivityDetail } from "../../redux/slices/activity.slice";
 
 const ActivityDetailPage = () => {
   const dispatch = useDispatch();
@@ -25,8 +27,10 @@ const ActivityDetailPage = () => {
   const [activity, setActivity] = useState<IActivity>(activityDetail);
 
   useEffect(() => {
-    dispatch(getActivity({ id }));
-  }, [dispatch]);
+    if (id) {
+      dispatch(getActivityDetail({ id: id.toString() }));
+    }
+  }, [dispatch, id]);
 
   useEffect(() => {
     setActivity(activityDetail);
@@ -34,7 +38,7 @@ const ActivityDetailPage = () => {
 
   return (
     <ActivityDetailPageStyle>
-      <Box>Activity Detail</Box>
+      <Box className="activity-detail-title">Activity Detail</Box>
       <ActivityDetailComponent data={activity} />
     </ActivityDetailPageStyle>
   );
