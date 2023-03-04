@@ -39,6 +39,7 @@ const ActivityDetailPage = () => {
   return (
     <ActivityDetailPageStyle>
       <Box className="activity-detail-title">Activity Detail</Box>
+      <br />
       <ActivityDetailComponent data={activity} />
     </ActivityDetailPageStyle>
   );

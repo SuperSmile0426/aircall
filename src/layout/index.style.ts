@@ -3,10 +3,14 @@ import styled from '@emotion/styled';
 
 export const LayoutComponentStyle = styled('div')(({ theme }: any) => {
   return {
-    widows: "100%",
+    width: "100%",
+    height: "100vh",
     display: "flex",
     flexDirection: "column",
-    padding: "30px 45px 100px 45px",
+    // justifyContent: "center",
+    alignItems: "center",
+    paddingTop: "10vh",
+    background: "grey",
 
     '@global': {
       '*::-webkit-scrollbar': {

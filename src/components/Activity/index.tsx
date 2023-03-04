@@ -1,6 +1,6 @@
 // import node modules
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
 // import mui components
@@ -77,6 +77,7 @@ const ActivityComponent: React.FC<Props> = ({
                 {new Date(data.created_at).getHours()} : {new Date(data.created_at).getMinutes()}
                 <Box className="archieve-text" onClick={(event: any) => archiieveActivtity(event, data.id)}>Achieve</Box>
             </Box>
+
         </ActivityComponentStyle >
     )
 };
