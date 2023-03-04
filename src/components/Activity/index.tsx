@@ -1,7 +1,7 @@
 // import node modules
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // import mui components
 import {
@@ -24,6 +24,7 @@ import { ActivityComponentStyle } from './index.style';
 import { IActivity } from '../../models';
 
 // redux & store
+import { RootState } from '../../redux/store';
 import { archieveActivity } from "../../redux/slices/activity.slice";
 
 type Props = {
@@ -77,6 +78,7 @@ const ActivityComponent: React.FC<Props> = ({
                 {new Date(data.created_at).getHours()} : {new Date(data.created_at).getMinutes()}
                 <Box className="archieve-text" onClick={(event: any) => archiieveActivtity(event, data.id)}>Achieve</Box>
             </Box>
+
         </ActivityComponentStyle >
     )
 };

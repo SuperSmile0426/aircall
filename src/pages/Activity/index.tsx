@@ -21,7 +21,7 @@ import { IActivity } from "../../models";
 
 const ActivityPage = () => {
   const dispatch = useDispatch();
-  const { activities } = useSelector((state: RootState) => state.activity);
+  const { activities, archievingActivity } = useSelector((state: RootState) => state.activity);
 
   const [feed, setFeed] = useState<IActivity[]>(activities);
 
@@ -48,7 +48,6 @@ const ActivityPage = () => {
           <Tab label="All Call" className="tab-item" />
         </Tabs>
       </Box>
-
       {(() => {
         return <>
           <Box className="detail-content-body">
@@ -66,7 +65,11 @@ const ActivityPage = () => {
             })()}
           </Box></>
       })()}
-    </ActivityPageStyle>
+
+      <br />
+      <Box>{archievingActivity ? "Archieving" : ""}</Box>
+
+    </ActivityPageStyle >
   );
 };
 
