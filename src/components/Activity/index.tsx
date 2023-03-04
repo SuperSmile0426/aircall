@@ -1,7 +1,7 @@
 // import node modules
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 
 // import mui components
 import {
@@ -24,7 +24,6 @@ import { ActivityComponentStyle } from './index.style';
 import { IActivity } from '../../models';
 
 // redux & store
-import { RootState } from '../../redux/store';
 import { archieveActivity } from "../../redux/slices/activity.slice";
 
 type Props = {
